@@ -1,3 +1,12 @@
+# Build artifacts
+server
+*.o
+*.log
+
+# Dependencies
+httplib.h
+json.hpp
+
+# Python environments
 __pycache__/
-*.egg-info/
 *.pyc
