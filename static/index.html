@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Comment</title>
+</head>
+<body>
+    <h2>Submit a Comment</h2>
+    <form id="commentForm">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+        <label for="comment">Comment:</label><br>
+        <textarea id="comment" name="comment" required></textarea><br><br>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="message"></p>
+
+    <script>
+        document.getElementById("commentForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const name = document.getElementById("name").value;
+            const comment = document.getElementById("comment").value;
+
+            const response = await fetch("/submit", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name: name, comment: comment })
+            });
+
+            const result = await response.json();
+            document.getElementById("message").innerText = result.message || "Error submitting comment.";
+        });
+    </script>
+</body>
+</html>
