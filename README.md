@@ -1,56 +1,32 @@
-# first-CLI
-a normal CLI application, on my journey on how to make CLIs 
+# C++ / MongoDB / HTML / JS Small Website
 
-## pyc - Python Basic Calculator CLI
+This is a small website stack that contains:
+- HTML / JS (Frontend form)
+- C++ (Backend server using `cpp-httplib` and `nlohmann/json`)
+- MongoDB (Database via `libmongoc`)
 
-`pyc` is a basic calculator command-line tool written in Python. It allows you to perform basic arithmetic operations (addition, subtraction, multiplication, and division) directly from your terminal.
+## Prerequisites
 
-### Installation
-
-To install `pyc` locally, navigate to the repository directory and run:
-
+On Ubuntu, you need to install the following dependencies:
 ```bash
-pip install -e .
+sudo apt-get update
+sudo apt-get install -y cmake make g++ libmongoc-1.0-0t64 libmongoc-dev libbson-dev pkg-config
 ```
 
-This will install the CLI in editable mode, making the `pyc` command available in your environment.
-
-### Usage
-
-The `pyc` command follows this syntax:
-
+You also need MongoDB running locally:
 ```bash
-pyc <operation> <number1,number2>
+# Example to run MongoDB in background
+sudo mkdir -p /data/db
+sudo chown -R $(whoami) /data/db
+mongod --fork --logpath /tmp/mongodb.log
 ```
 
-#### Supported Operations
-- `add`: Addition
-- `sub`: Subtraction
-- `mul`: Multiplication
-- `div`: Division
+## Running the Application
 
-#### Examples
+To run the application, simply execute the `run.sh` script:
 
-Addition:
 ```bash
-$ pyc add 1,2
-3
+./run.sh
 ```
 
-Subtraction:
-```bash
-$ pyc sub 5.5,2
-3.5
-```
-
-Multiplication:
-```bash
-$ pyc mul 3,4
-12
-```
-
-Division:
-```bash
-$ pyc div 10,2
-5
-```
+Then visit `http://localhost:8080/` in your browser. When you submit the form, it will store the `name` and `content` into the MongoDB `testing` database, inside the `submissions` collection.
